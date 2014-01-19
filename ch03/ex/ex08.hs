@@ -16,3 +16,4 @@ weirdTree = Mode "parent" (Mode "left child" Nothing Nothing)
                           (Mode "right child" Nothing Nothing)
 
 -- ex08, pg. 70
+
