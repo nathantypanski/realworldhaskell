@@ -1,3 +1,4 @@
+--file: ch04/InteractWith.hs
 import System.Environment (getArgs)
 
 interactWith function inputFile outputFile = do
