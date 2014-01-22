@@ -1,5 +1,6 @@
 -- file: ch04/ch04.exercises.hs
 import Data.Maybe
+import Data.Char (digitToInt)
 
 safeHead :: [a] -> Maybe a
 safeHead []     = Nothing
@@ -25,10 +26,14 @@ splitWith predicate (x:xs)
   | not (predicate x) = splitWith predicate xs
   | otherwise         = beginning : ending
   where
-    beginning   = (takeWhile predicate (x:xs))
+    beginning   = takeWhile predicate (x:xs)
     ending      = apply splitWith dropWhile predicate xs
     apply f h p = f p . h p
 
 testSplitWith = splitWith notSpace phrase
-                where notSpace = \x -> x /= ' '
+                where notSpace x = x /= ' '
                       phrase = "Hello World. And all that!"
+
+-- Ex01, pg. 97
+asInt :: String -> Int
+asInt = foldl (\x a -> x * 10 + digitToInt a) 0
