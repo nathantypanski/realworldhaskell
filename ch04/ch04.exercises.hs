@@ -36,4 +36,5 @@ testSplitWith = splitWith notSpace phrase
 
 -- Ex01, pg. 97
 asInt :: String -> Int
-asInt = foldl (\x a -> x * 10 + digitToInt a) 0
+asInt (x:xs) = if x == '-' then (- (i xs)) else i (x:xs)
+    where i (y:ys) = foldl (\z a -> z * 10 + digitToInt a) 0 (y:ys)
