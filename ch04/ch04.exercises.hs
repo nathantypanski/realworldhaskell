@@ -18,7 +18,7 @@ safeLast (x:xs) = Just $ fromJust $ safeLast xs
 safeInit :: [a] -> Maybe [a]
 safeInit [] = Nothing
 safeInit (x:[]) = Just []
-safeInit (x:xs) = Just $ [x] ++ (fromJust $ safeInit xs)
+safeInit (x:xs) = Just $ x : fromJust (safeInit xs)
 
 splitWith :: (a -> Bool) -> [a] -> [[a]]
 splitWith _ []        = []
