@@ -1,6 +1,6 @@
 -- file: ch04/ch04.exercises.hs
 import Data.Maybe
-import Data.Char (digitToInt)
+import Data.Char (digitToInt, isNumber)
 
 safeHead :: [a] -> Maybe a
 safeHead []     = Nothing
@@ -35,6 +35,11 @@ testSplitWith = splitWith notSpace phrase
                       phrase = "Hello World. And all that!"
 
 -- Ex01, pg. 97
-asInt :: String -> Int
-asInt (x:xs) = if x == '-' then (- (i xs)) else i (x:xs)
-    where i (y:ys) = foldl (\z a -> z * 10 + digitToInt a) 0 (y:ys)
+asInt :: String -> Either String Int
+asInt [] = Left "[] is not a digit"
+asInt (x:xs) 
+    | all isNumber (x:xs)         = Right $ i (x:xs)
+    | x == '-' && all isNumber xs = Right $ -(i xs)
+    | x == '-' || isNumber x      = asInt xs
+    | otherwise                   = Left ("Not a digit: '" ++ [x] ++ "'")
+      where i (y:ys) = foldl (\z a -> z * 10 + digitToInt a) 0 (y:ys)
